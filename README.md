@@ -32,16 +32,25 @@ $$
 
 ## Visual Workflow
 
+
 ```mermaid
 flowchart TD
-    A["OpenNeuro ds000117<br/>Participant 01, Run 1"] --> B["Existing fMRIPrep derivatives<br/>Preprocessed upstream"]
-    A --> C["Original BIDS events"]
-    B --> D["01_inspect.py<br/>BOLD, mask, events, confounds"]
-    C --> D
-    D --> E["02_glm.py<br/>Motion QC + design matrix + GLM"]
-    E --> F["Contrast: initial intact vs scrambled"]
-    F --> G["03_contrast.py<br/>Two-sided voxelwise FDR, q = 0.05"]
-    G --> H["Activation figure + interpretation"]
+    A["Dataset<br/>ds000117 · sub-01 · Run 1"]
+    B["Input Data<br/>BOLD · Mask<br/>Events · Confounds"]
+    C["01_inspect.py<br/>Data inspection"]
+    D["02_glm.py<br/>Motion QC · GLM<br/>Contrast estimation"]
+    E["03_contrast.py<br/>FDR correction"]
+    F["Results<br/>Statistical maps · Figures"]
+
+    A --> B --> C --> D --> E --> F
+
+    classDef input fill:#EAF2FF,stroke:#4F83CC,color:#17365D,stroke-width:1.5px;
+    classDef process fill:#F5F7FA,stroke:#718096,color:#243247,stroke-width:1.5px;
+    classDef output fill:#E9F7EE,stroke:#37966B,color:#175C3B,stroke-width:1.5px;
+
+    class A,B input;
+    class C,D,E process;
+    class F output;
 ```
 
 ## Key Exploratory Results
