@@ -1,8 +1,14 @@
 # Task-fMRI Analysis of Face Processing Using Python and Nilearn
 
-A compact, reproducible **task-fMRI GLM demonstration** using preprocessed data from [OpenNeuro ds000117](https://openneuro.org/datasets/ds000117), the Wakeman–Henson face-processing dataset.
+![Python](https://img.shields.io/badge/Python-3.12+-blue)
+![Nilearn](https://img.shields.io/badge/Nilearn-fMRI%20Analysis-green)
+![NiBabel](https://img.shields.io/badge/NiBabel-Neuroimaging-orange)
+![OpenNeuro](https://img.shields.io/badge/Data-OpenNeuro-purple)
+![Task fMRI](https://img.shields.io/badge/Analysis-Task%20fMRI-red)
+![Portfolio Project](https://img.shields.io/badge/Project-Portfolio-informational)
 
-**Scope:** One participant (`sub-01`) · One functional run (`run-1`) · One predefined contrast · Three Python scripts.
+
+A compact, reproducible **task-fMRI GLM demonstration** using preprocessed data from [OpenNeuro ds000117](https://openneuro.org/datasets/ds000117), the Wakeman–Henson face-processing dataset. This project demonstrates a simple first-level GLM analysis of one participant and one run, comparing initial intact face stimuli against scrambled face stimuli.
 
 ## Project Snapshot
 
@@ -32,26 +38,9 @@ $$
 
 ## Visual Workflow
 
-
-```mermaid
-flowchart TD
-    A["Dataset<br/>ds000117 · sub-01 · Run 1"]
-    B["Input Data<br/>BOLD · Mask<br/>Events · Confounds"]
-    C["01_inspect.py<br/>Data inspection"]
-    D["02_glm.py<br/>Motion QC · GLM<br/>Contrast estimation"]
-    E["03_contrast.py<br/>FDR correction"]
-    F["Results<br/>Statistical maps · Figures"]
-
-    A --> B --> C --> D --> E --> F
-
-    classDef input fill:#EAF2FF,stroke:#4F83CC,color:#17365D,stroke-width:1.5px;
-    classDef process fill:#F5F7FA,stroke:#718096,color:#243247,stroke-width:1.5px;
-    classDef output fill:#E9F7EE,stroke:#37966B,color:#175C3B,stroke-width:1.5px;
-
-    class A,B input;
-    class C,D,E process;
-    class F output;
-```
+<p align="center">
+  <img src="figures/workflow_overview.png" alt="Workflow overview" width="900">
+</p>
 
 ## Key Exploratory Results
 
@@ -171,6 +160,17 @@ python scripts/03_contrast.py
 
 The scripts save figures in `figures/` and statistical NIfTI files in the local `results/` folder.
 
+## Skills Demonstrated
+
+- **fMRI Data Handling:** Loading and inspecting 4D BOLD images, brain masks, and BIDS-style event files using NiBabel and Pandas.
+- **Experimental Design:** Understanding task conditions, event timing, and constructing first-level design matrices.
+- **Quality Control:** Evaluating framewise displacement and reviewing motion-related confounds.
+- **Statistical Modeling:** Building and fitting a first-level GLM using Nilearn, including HRF modeling, temporal filtering, and motion regressors.
+- **Contrast Estimation:** Defining and calculating the initial intact-faces-versus-scrambled-faces contrast.
+- **Statistical Inference:** Applying two-sided voxelwise FDR correction at q = 0.05.
+- **Neuroimaging Visualization:** Generating brain slices, event plots, design matrices, motion QC figures, and statistical activation maps.
+- **Reproducible Research:** Organizing a three-script Python workflow, documenting dependencies, and publishing code and figures on GitHub.
+- 
 ## Limitations
 
 This is an educational **single-participant, single-run** analysis, so it cannot support population-level inference. Intact and scrambled stimuli differ in more than face identity; the contrast does not establish face recognition or functional face selectivity. Findings depend on the upstream derivatives and the selected model, including how nuisance signals are handled. FDR correction addresses voxelwise multiplicity under the fitted model but does not remove artifacts or experimental confounding.
